@@ -72,127 +72,116 @@ housing$month.sold.name <- factor(housing$month.sold.name,
 
 
 # Define UI for application that plots features -----------
-ui <- fluidPage(
-  
-  # Application title -----------------------------------------------
-  titlePanel(title = "Miami Housing Market 2016"),
-  
-  
-  # Horizontal line for visual separation -----------------------
-  hr(),
-  
-  
-  # Sidebar layout with a input and output definitions --------------
-  sidebarLayout(
-    # Inputs: Select variables to plot ------------------------------
-    sidebarPanel(
-      # Set Age of the property ------------------------------------
-      sliderInput(inputId = "property.age",
-                  label = "Select age of the property for all graphs, map and table:", 
-                  min = 0, 
-                  max = 96, 
-                  value = c(0, 10)),
-
-    # Set Age of the property ------------------------------------
-      sliderInput(inputId = "property.ocean.dist",
-                  label = "Select properties ocean distance (ft) for all graphs, map and table:", 
-                  min = 0, max = 67000, 
-                  value = c(0, 5280)),    
-    
-    
-    # Set Price Range of the property -----------------------------
-      checkboxGroupInput(inputId = "property.price",
-                         label = "Select price of the property for all graphs, map and table:",
-                         choices = c("Less than $100,000",
-                                     "$100,000 - $250,000", 
-                                     "$250,001 - $500,000", 
-                                     "$500,001 - $1,000,000", 
-                                     "More than $1,000,000"),
-                         selected = c("Less than $100,000", "$100,000 - $250,000", "$250,001 - $500,000", "$500,001 - $1,000,000", "More than $1,000,000")),
-    
-    # Horizontal line for visual separation -----------------------
-    hr(),
-    
-    
-    # Show data table ---------------------------------------------
-      checkboxInput(inputId = "show_data",
-                    label = "Show data table",
-                  value = TRUE), 
-    
-    
-    # Add Download Button
-      downloadButton("download.data", "Download"),
-      h6("Press the download button to save the dataset."), 
-    
-  ),
-  
-  # Output --------------------------------------------------------
-  mainPanel(
-    
-    # Tabs to separate each graph
-    tabsetPanel(
-     
-      #Map Tab ----------------------------------------------------           
-      tabPanel("Map", shinyjs::useShinyjs(),
-               # Style the background and change the page
-               tags$style(type = "text/css", ".leaflet {height: calc(100vh - 90px) !important;}
+ui <- navbarPage("Miami Housing Market 2016",
+                 theme = shinytheme("spacelab"),
+                 # Sidebar layout with a input and output definitions --------------
+                 sidebarLayout(
+                   # Inputs: Select variables to plot ------------------------------
+                   sidebarPanel(
+                     # Set Age of the property ------------------------------------
+                     sliderInput(inputId = "property.age",
+                                 label = "Select age of the property for all graphs, map and table:",
+                                 min = 0,
+                                 max = 96,
+                                 value = c(0, 10)),
+                     
+                     # Set Age of the property ------------------------------------
+                     sliderInput(inputId = "property.ocean.dist",
+                                 label = "Select properties ocean distance (ft) for all graphs, map and table:",
+                                 min = 0, max = 67000,
+                                 value = c(0, 5280)),
+                     
+                     
+                     # Set Price Range of the property -----------------------------
+                     checkboxGroupInput(inputId = "property.price",
+                                        label = "Select price of the property for all graphs, map and table:",
+                                        choices = c("Less than $100,000",
+                                                    "$100,000 - $250,000",
+                                                    "$250,001 - $500,000",
+                                                    "$500,001 - $1,000,000",
+                                                    "More than $1,000,000"),
+                                        selected = c("Less than $100,000", "$100,000 - $250,000", "$250,001 - $500,000", "$500,001 - $1,000,000", "More than $1,000,000")),
+                     
+                     # Horizontal line for visual separation -----------------------
+                     hr(),
+                     
+                     
+                     # Show data table ---------------------------------------------
+                     checkboxInput(inputId = "show_data",
+                                   label = "Show data table",
+                                   value = TRUE),
+                     
+                     
+                     # Add Download Button
+                     downloadButton("download.data", "Download"),
+                     h6("Press the download button to save the dataset."),
+                     
+                   ),
+                   
+                   # Output --------------------------------------------------------
+                   mainPanel(
+                     # Tabs to separate each graph
+                     tabsetPanel(
+                       #Map Tab ----------------------------------------------------
+                       tabPanel("Map", shinyjs::useShinyjs(),
+                                #Style the background and change the page
+                                tags$style(type = "text/css", ".leaflet {height: calc(100vh - 90px) !important;}
                                         body {background-color: white}"),
-               # Map Output
-               leafletOutput(outputId = "map")),
-      
-    
-      # Plots Tab -------------------------------------------------
-      tabPanel("Plots", 
-               h4("Market Analysis"),
-               plotlyOutput(outputId = "scatterplot"),
-               
-               # Select variable for y-axis ----------------------------------
-               selectInput(inputId = "y", 
-                           label = "Plots - Market Analysis Y-axis:",
-                           choices = c("Sale price" = "sale.prc", 
-                                       "Land area (sqft)" = "lnd.sqft", 
-                                       "Floor area (sqft)" = "tot.lvg.area", 
-                                       "Value of special features" = "spec.feat.val", 
-                                       "Distance to the ocean" = "ocean.dist", 
-                                       "Distance to nearest water body" = "water.dist",
-                                       "Distance to business dist." = "cntr.dist", 
-                                       "Distance to the highway" = "hw.dist"), 
-                           selected = "sale.prc"),
-               
-               
-               # Select variable for x-axis ----------------------------------
-               selectInput(inputId = "x", 
-                           label = "Plots - Market Analysis X-axis:",
-                           choices = c("Sale price" = "sale.prc", 
-                                       "Land area (sqft)" = "lnd.sqft", 
-                                       "Floor area (sqft)" = "tot.lvg.area", 
-                                       "Value of special features" = "spec.feat.val", 
-                                       "Distance to the ocean" = "ocean.dist", 
-                                       "Distance to nearest water body" = "water.dist",
-                                       "Distance to business dist." = "cntr.dist", 
-                                       "Distance to the highway" = "hw.dist"), 
-                           selected = "lnd.sqft")
-      ), #tab for scatter plot
-               
-               hr(), 
-               h4("Month Sold Distribution"), 
-               plotlyOutput(outputId = "bar.chart"), 
-               hr(), 
-               h4("Sale Price Distribution"), 
-               plotlyOutput(outputId = "pie.chart")),
-      
-      
-      # Data table Tab ---------------------------------------------
-      tabPanel("Properties Table", 
-               fluidPage(
-                 wellPanel(DT::dataTableOutput(outputId = "table"))
-      
-    )
-  )
-  )
-  )
-  )
-  
+                                # Map Output
+                                leafletOutput(outputId = "map")),
+                       
+                       
+                       
+                       # Plots Tab -------------------------------------------------
+                       tabPanel("Plots",
+                                h4("Market Analysis"),
+                                plotlyOutput(outputId = "scatterplot"),
+                                # Select variable for y-axis ----------------------------------
+                                selectInput(inputId = "y",
+                                            label = "Plots - Market Analysis Y-axis:",
+                                            choices = c("Sale price" = "sale.prc",
+                                                        "Land area (sqft)" = "lnd.sqft",
+                                                        "Floor area (sqft)" = "tot.lvg.area",
+                                                        "Value of special features" = "spec.feat.val",
+                                                        "Distance to the ocean" = "ocean.dist",
+                                                        "Distance to nearest water body" = "water.dist",
+                                                        "Distance to business dist." = "cntr.dist",
+                                                        "Distance to the highway" = "hw.dist"),
+                                            selected = "sale.prc"),
+                                
+                                # Select variable for x-axis ----------------------------------
+                                selectInput(inputId = "x",
+                                            label = "Plots - Market Analysis X-axis:",
+                                            choices = c("Sale price" = "sale.prc",
+                                                        "Land area (sqft)" = "lnd.sqft",
+                                                        "Floor area (sqft)" = "tot.lvg.area",
+                                                        "Value of special features" = "spec.feat.val",
+                                                        "Distance to the ocean" = "ocean.dist",
+                                                        "Distance to nearest water body" = "water.dist",
+                                                        "Distance to business dist." = "cntr.dist",
+                                                        "Distance to the highway" = "hw.dist"),
+                                            selected = "lnd.sqft"),
+                                
+                                #Bar Chart
+                                hr(),
+                                h4("Month Sold Distribution"),
+                                plotlyOutput(outputId = "bar.chart"),
+                                
+                                #Pier Chart
+                                hr(),
+                                h4("Sale Price Distribution"),
+                                plotlyOutput(outputId = "pie.chart")
+                                ),
+                     
+                     
+                     # Data table Tab ---------------------------------------------
+                     tabPanel("Properties Table",
+                              fluidPage(
+                                wellPanel(DT::dataTableOutput(outputId = "table"))
+                                
+                              ))))))
+
+
 
 
 # Define server function required to create the scatter plot ---------
@@ -204,15 +193,15 @@ server <- function(input, output) {
              ocean.dist >= input$property.ocean.dist[1] & ocean.dist <= input$property.ocean.dist[2])
   })
   
-
+  
   # Create Map --------------------------------------------------------
-  #output$map <- renderLeaflet({
-  #  leaflet() %>%
-  #    addTiles(urlTemplate = "http://mt0.google.com/vt/lyrs=m&hl=en&x={x}&y={y}&z={z}&s=Ga", attribution = "Google", group = "Google") %>%
-  #    addProviderTiles(provider = providers$Wikimedia, group = "Wiki") %>%
-  #    setView(-74.0060, 40.7128, 3) %>%
-  #    addLayersControl(baseGroups = c("Google", "Wiki"))
-  #})
+  output$map <- renderLeaflet({
+    leaflet() %>%
+      addTiles(urlTemplate = "http://mt0.google.com/vt/lyrs=m&hl=en&x={x}&y={y}&z={z}&s=Ga", attribution = "Google", group = "Google") %>%
+      addProviderTiles(provider = providers$Wikimedia, group = "Wiki") %>%
+      setView(-80.191788, 25.761681, 12) %>%
+      addLayersControl(baseGroups = c("Google", "Wiki"))
+  })
   
   
   # Create Bar Chart -------------------------------------------------
@@ -266,10 +255,10 @@ server <- function(input, output) {
   # Print data table------------------------------------------------------
   output$table <- DT::renderDataTable(
     if(input$show_data){
-      DT::datatable(data = housing.subset()[0:14], 
+      DT::datatable(data = housing.subset()[3:14], 
                     options = list(pageLength = 20), 
                     rownames = FALSE,
-                    colnames = c('latitude' = 'lat', 'longitude' = 'long', 'parcel no' = 'parcel.no', 'sale price' = 'sale.prc', 
+                    colnames = c('parcel no' = 'parcel.no', 'sale price' = 'sale.prc', 
                                  'land area' = 'lnd.sqft', 'floor area' = 'tot.lvg.area', 'special features value' = 'spec.feat.val', 
                                  'rail dist' = 'rail.dist', 'ocean dist' = 'ocean.dist', 'water dist' = 'water.dist', 'business center dist' = 'cntr.dist',
                                  'sub-center dist' = 'subcntr.di', 'highway dist' = 'hw.dist', 'property age' = 'age'))  %>% 
