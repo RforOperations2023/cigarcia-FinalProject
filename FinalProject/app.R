@@ -16,6 +16,7 @@ library(DT)
 library(stringr)
 library(tools)
 library(readr)
+library(fontawesome)
 
 #library(tidyverse)
 
@@ -65,10 +66,26 @@ housing$month.sold.name <- factor(housing$month.sold.name,
 
 #Importing Spacial Data
 
-#city.load <- st_read("./City_Boundary/City_Boundary.shp")
-#plot(cds.load)
-#neighb.load <- st_read("./Miami_Neighborhoods/Miami_Neighborhoods_Shapefile.shp")
+#Loading Neighborhoods 
+neighb.load <- st_read("./Miami_Neighborhoods/Miami_Neighborhoods_Shapefile.shp")
+
+# neighb.cent <- neighb.load %>% 
+#   st_centroid() %>%  
+#   mutate(longitude = sf::st_coordinates(.)[,1],
+#          latitude = sf::st_coordinates(.)[,2]) %>%
+#   st_set_geometry(NULL)
+# # Join centroid columns
+# neighb.load <- neighb.load %>%
+#   left_join(neighb.cent) 
+
+
+#Loading Trolley Routes
 trolley.load <- st_read("./Miami_Trolley_Routes/Miami_Trolley_Routes.shp")
+#trolley.load$lat <- 
+#trolley.load$long <- 
+
+#Creating  Icons
+homeIcon <- makeAwesomeIcon(icon = "home", iconColor = 'white', library = "fa", markerColor = "darkblue")
 
 
 # Define UI for application that plots features -----------
@@ -78,6 +95,14 @@ ui <- navbarPage("Miami Housing Market 2016",
                  sidebarLayout(
                    # Inputs: Select variables to plot ------------------------------
                    sidebarPanel(
+                    
+                     
+                     # # Select Miami Neighborhood
+                     # selectInput(inputId = "neighSelect",
+                     #              label = "Select the neighborhood of the property for all graphs, map and table:",
+                     #              choices = unique(sort(neighb.load$LABEL)),
+                     #              selected = "Brickel Key"),
+                     
                      # Set Age of the property ------------------------------------
                      sliderInput(inputId = "property.age",
                                  label = "Select age of the property for all graphs, map and table:",
@@ -187,6 +212,13 @@ ui <- navbarPage("Miami Housing Market 2016",
 # Define server function required to create the scatter plot ---------
 server <- function(input, output) {
 
+  # Data subset with reactive function for graphs 
+  housing.subset <- reactive({
+    req(input$property.age, input$property.price, input$property.ocean.dist)
+    filter(housing, price.range %in% input$property.price & age >= input$property.age[1] & age <= input$property.age[2] & 
+             ocean.dist >= input$property.ocean.dist[1] & ocean.dist <= input$property.ocean.dist[2])
+  })
+  
   # Create Map --------------------------------------------------------
   output$map <- renderLeaflet({
     leaflet() %>%
@@ -196,12 +228,22 @@ server <- function(input, output) {
       addLayersControl(baseGroups = c("Google", "Wiki"))
   })
 
-  # Data subset with reactive function for graphs 
-  housing.subset <- reactive({
-    req(input$property.age, input$property.price, input$property.ocean.dist)
-    filter(housing, price.range %in% input$property.price & age >= input$property.age[1] & age <= input$property.age[2] & 
-             ocean.dist >= input$property.ocean.dist[1] & ocean.dist <= input$property.ocean.dist[2])
+
+  # Adding layers to map 
+  observe({
+    HouseInf <- housing.subset()
+    layer1<- leafletProxy("map", data = HouseInf) %>%
+      clearMarkers() %>%
+      addAwesomeMarkers(data = HouseInf, ~long, ~lat, popup = paste0("Sale Price:", formatC(HouseInf$sale.prc, digits = 2, format = "d", big.mark = ",")))
+  
   })
+  
+  # observe({
+  #   leafletProxy("map", data = trolley.load) %>%
+  #     addPolylines()
+  #   
+  # })
+  
   
 
   # Create Bar Chart -------------------------------------------------
