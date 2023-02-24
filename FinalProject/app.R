@@ -68,7 +68,7 @@ housing$month.sold.name <- factor(housing$month.sold.name,
 #city.load <- st_read("./City_Boundary/City_Boundary.shp")
 #plot(cds.load)
 #neighb.load <- st_read("./Miami_Neighborhoods/Miami_Neighborhoods_Shapefile.shp")
-#trolley.load <- st_read("./Miami_Trolley_Routes/Miami_Trolley_Routes.shp")
+trolley.load <- st_read("./Miami_Trolley_Routes/Miami_Trolley_Routes.shp")
 
 
 # Define UI for application that plots features -----------
@@ -186,14 +186,7 @@ ui <- navbarPage("Miami Housing Market 2016",
 
 # Define server function required to create the scatter plot ---------
 server <- function(input, output) {
-  
-  housing.subset <- reactive({
-    req(input$property.age, input$property.price, input$property.ocean.dist)
-    filter(housing, price.range %in% input$property.price & age >= input$property.age[1] & age <= input$property.age[2] & 
-             ocean.dist >= input$property.ocean.dist[1] & ocean.dist <= input$property.ocean.dist[2])
-  })
-  
-  
+
   # Create Map --------------------------------------------------------
   output$map <- renderLeaflet({
     leaflet() %>%
@@ -202,8 +195,15 @@ server <- function(input, output) {
       setView(-80.191788, 25.761681, 12) %>%
       addLayersControl(baseGroups = c("Google", "Wiki"))
   })
+
+  # Data subset with reactive function for graphs 
+  housing.subset <- reactive({
+    req(input$property.age, input$property.price, input$property.ocean.dist)
+    filter(housing, price.range %in% input$property.price & age >= input$property.age[1] & age <= input$property.age[2] & 
+             ocean.dist >= input$property.ocean.dist[1] & ocean.dist <= input$property.ocean.dist[2])
+  })
   
-  
+
   # Create Bar Chart -------------------------------------------------
   output$bar.chart <- renderPlotly({
     ggplotly(
@@ -256,7 +256,7 @@ server <- function(input, output) {
   output$table <- DT::renderDataTable(
     if(input$show_data){
       DT::datatable(data = housing.subset()[3:14], 
-                    options = list(pageLength = 20), 
+                    options = list(pageLength = 20, scrollX = TRUE), # add scrollX option
                     rownames = FALSE,
                     colnames = c('parcel no' = 'parcel.no', 'sale price' = 'sale.prc', 
                                  'land area' = 'lnd.sqft', 'floor area' = 'tot.lvg.area', 'special features value' = 'spec.feat.val', 
