@@ -8,7 +8,6 @@ library(shinyjs)
 library(dplyr)
 library(shinydashboard)
 library(reshape2)
-library(dplyr)
 library(plotly)
 library(ggplot2)
 library(hms)
@@ -18,6 +17,7 @@ library(tools)
 library(readr)
 library(fontawesome)
 library(geojsonR)
+library(purrr)
 
 #library(tidyverse)
 
@@ -66,36 +66,77 @@ housing$month.sold.name <- factor(housing$month.sold.name,
 
 housing$index <- seq_along(housing$sale.prc) 
 
-#Importing Spacial Data
+#IMPORTING SPATIAL DATA
 
-#Loading Neighborhoods 
-municipality.load <- st_read("./Municipal_Boundary/Municipal_Boundary.shp")
-municipality <- st_as_sf(municipality.load, coords = c("geometry"), crs = 4326)
+#Loading Municipalities (Polygons)
+municipality.load <- st_read("./Municipal_Boundary/Municipal_Boundary.shp") #%>%
+  
+#neigh.load <- st_read("./Miami_Neighborhoods/Miami_Neighborhoods_Shapefile.shp")
 
-#Joined datasets 
-#housing_sf <- st_as_sf(housing, coords = c("long", "lat"), crs = 4326)
-#joined <- st_join(housing_sf, municipality, join = st_intersects)
-
-
-
-#Loading Trolley Routes
-# trolley.load <- st_read("./Miami_Trolley_Routes.geojson") %>%
-#   mutate(longitude = sf::st_coordinates(.)[,1],
-#          latitude = sf::st_coordinates(.)[,2])
-
-# trolley.cent <- trolley.load %>%
+# municipality.cent <- municipality.load %>%
 #   st_centroid() %>%
 #   mutate(longitude = sf::st_coordinates(.)[,1],
 #          latitude = sf::st_coordinates(.)[,2]) %>%
 #   st_set_geometry(NULL)
+# 
+# 
+# # Join centroid columns
+# municipality <- municipality.load %>%
+#      left_join(municipality.cent)
+
+
+
+#Loading Trolley Routes (Multi-Line Strings)
+#trolley.load <- st_read("./Miami_Trolley_Routes.geojson")
+
+#%>%
+#mutate(longitude = sf::st_coordinates(.)[,1],
+#       latitude = sf::st_coordinates(.)[,2])
+
+
+
+# trolley.cent <- trolley.load %>% 
+#     st_centroid() %>%  
+#     mutate(longitude = sf::st_coordinates(.)[,1],
+#            latitude = sf::st_coordinates(.)[,2]) %>%
+#     st_set_geometry(NULL)
+#   # Join centroid columns
+#   trolley.load <- trolley.load %>%
+#     left_join(trolley.cent) 
+#   
+
+
+# Read in the GeoJSON file as an sf object
+
+#trolley.load <- st_read("./Miami_Trolley_Routes.geojson")
+
+  #mutate(longitude = map(geometry, ~ st_coordinates(.)[, 1]),
+  #       latitude = map(geometry, ~ st_coordinates(.)[, 2]))
+
+ # trolley.cent <- trolley.load %>%
+ #   st_centroid() %>%
+ #   mutate(longitude = sf::st_coordinates(.)[,1],
+ #          latitude = sf::st_coordinates(.)[,2]) %>%
+ #   st_set_geometry(NULL)
 
 # # Join centroid columns
 # trolley.load <- ntrolley.load %>%
 #   left_join(trolley.cent)
 
 
+
+
+#SPATIAL JOIN BETWEEN MUNICIPALITIES AND HOUSING 
+
+# #Combining Housing Data set with municipalities
+# housing_sf <- st_as_sf(housing, coords = c("long", "lat"), crs = 4326)
+# 
+# #Joining data sets
+# joined_sf <- st_join(housing_sf, municipality.load, join = st_covers) # also try join = st_intersects
+# joined_df <- as.data.frame(joined_sf)
+
+
 #Creating  Icons
-#homeIcon <- makeAwesomeIcon(icon = "home", iconColor = 'white', library = "fa", markerColor = "darkblue")
 
 homeIcon <- awesomeIconList(
   "Less than $100,000" = makeAwesomeIcon(icon = "home", library = "fa", markerColor = "red"),
@@ -116,11 +157,7 @@ ui <- navbarPage("Miami Housing Market 2016",
                     
                      
                      # # Select Miami Neighborhood
-                     #  selectInput(inputId = "municipality",
-                     #               label = "Select the municipality of the property for all graphs, map and table:",
-                     #               choices = unique(sort(municipality.load$NAME)),
-                     #               selected = "CORAL GABLES",
-                     #               multiple = TRUE),
+                    
                      
                      # Set Age of the property ------------------------------------
                      sliderInput(inputId = "property.age",
@@ -145,6 +182,12 @@ ui <- navbarPage("Miami Housing Market 2016",
                                                     "$500,001 - $1,000,000",
                                                     "More than $1,000,000"),
                                         selected = c("Less than $100,000", "$100,000 - $250,000", "$250,001 - $500,000", "$500,001 - $1,000,000", "More than $1,000,000")),
+                     
+                     selectInput(inputId = "municipality",
+                                 label = "Select the municipality of the property for all graphs, map and table:",
+                                 choices = unique(sort(municipality.load$NAME)),
+                                 selected = "CORAL GABLES", 
+                                 multiple = TRUE),
                      
                      # Horizontal line for visual separation -----------------------
                      hr(),
@@ -229,7 +272,7 @@ ui <- navbarPage("Miami Housing Market 2016",
 
 
 # Define server function required to create the scatter plot ---------
-server <- function(input, output) {
+server <- function(input, output, session) {
 
   # Data subset with reactive function for graphs 
   housing.subset <- reactive({
@@ -238,7 +281,17 @@ server <- function(input, output) {
              ocean.dist >= input$property.ocean.dist[1] & ocean.dist <= input$property.ocean.dist[2])
   })
   
+  
+  # # Data subset with reactive function for graphs 
+  # municipality.subset <- reactive({
+  #   req(input$municipality)
+  #   filter(municipality.load, NAME %in% input$municipality)
+  # })
+  
+  
+  
   # Create Map --------------------------------------------------------
+
   output$map <- renderLeaflet({
     leaflet() %>%
       addTiles(urlTemplate = "http://mt0.google.com/vt/lyrs=m&hl=en&x={x}&y={y}&z={z}&s=Ga", attribution = "Google", group = "Google") %>%
@@ -246,8 +299,76 @@ server <- function(input, output) {
       setView(-80.191788, 25.761681, 12) %>%
       addLayersControl(baseGroups = c("Google", "Wiki"))
   })
+  
+  
+  # output$map <- renderLeaflet({
+  #   leaflet() %>%
+  #     addTiles(urlTemplate = "http://mt0.google.com/vt/lyrs=m&hl=en&x={x}&y={y}&z={z}&s=Ga", attribution = "Google", group = "Google") %>%
+  #     addProviderTiles(provider = providers$Wikimedia, group = "Wiki") %>%
+  #     setView(-80.191788, 25.761681, 10)  #%>%
+  #     addLayersControl(baseGroups = c("Google", "Wiki")) 
+  #     #addLayersControl(
+  #     #  baseGroups = c("Property Locations", "Miami Municipality"),
+  #     #  baseLayers = list("Property Locations" = layer_1,
+  #     #                    "Miami Municipality" = layer_2))
+  #   
+  #     })
+  # 
+  
+# LAYERS
+  
+# PROPERTY CLUSTERS - Creating clusters based on price range 
+  observe({
+    HouseInf <- housing.subset()
+    
+    leafletProxy("map", data =  HouseInf) %>%
+       clearGroup(group = "HouseInf") %>%
+       clearMarkerClusters() %>%
+       addAwesomeMarkers(icon = ~homeIcon[price.range], 
+                         clusterOptions = markerClusterOptions(), 
+                         popup = paste0("Sale Price ($):", formatC(HouseInf$sale.prc, digits = 2, format = "d", big.mark = ","),
+                                        "<br> Floor Area (sqft):", formatC(HouseInf$tot.lvg.area, digits = 0, format = "d",big.mark = ",")), 
+                         group = "HouseInf", 
+                         layerId = ~ index)
 
+  })
+  
 
+  # # MIAMI MUNICIPALITIES - Adding Miami Municipalities to Map 
+  # observe({
+  #   MuniInf <- municipality.subset()
+  #   
+  #   leafletProxy("map", data = MuniInf) %>%
+  #     clearGroup(group = "MuniInf") %>%
+  #     addPolygons(popup = ~paste0("<b>", NAME, "</b>"), group = "MuniInf", layerId = ~MUNICID, fill = FALSE, color = "gray") 
+  # 
+  # }) 
+  
+  # trolley.subset <- reactive({
+  #   req(input$trolley)
+  #   filter(trolley.load, NAME %in% input$trolley)
+  # })
+  
+  
+  
+   # Add trolley routes to the map
+    # trolley <- trolley.load()
+    # #pal <- colorNumeric(palette = "Reds", domain = trolley.load$NAME)
+    # leafletProxy("map", data = trolley %>%
+    #     #clearShapes() %>%
+    #     addPolylines(lat = trolley$latitute, lng = trolley$longitute))
+
+  
+  # # MIAMI MUNICIPALITIES - Adding Miami Municipalities to Map
+  # observe({
+  #   HouseInf <- housing.subset()
+  #   leafletProxy("map", data = municipality.load) %>%
+  #     clearGroup(group = "HouseInf") %>%
+  #     addPolygons(popup = ~paste0("<b>", NAME, "</b>"), group = "Municipality", layerId = ~MUNICID, fill = FALSE, color = "gray")
+  # })
+  
+  
+  
   # # PROPERTY LAYER - Adding Properties layers to map using lat and long  
   # observe({
   #   HouseInf <- housing.subset()
@@ -257,59 +378,7 @@ server <- function(input, output) {
   #                                                                   "<br> Floor Area (sqft):", formatC(HouseInf$tot.lvg.area, digits = 0, format = "d",big.mark = ",")))
   # })
   
-  
-  # CLUSTERING LAYER
-  observe({
-    HouseInf <- housing.subset()
-     leafletProxy("map", data =  HouseInf) %>%
-      clearGroup(group = "HouseInf") %>%
-      clearMarkerClusters() %>%
-      addAwesomeMarkers(icon = ~homeIcon[price.range], 
-                        clusterOptions = markerClusterOptions(), 
-                        popup = paste0("Sale Price ($):", formatC(HouseInf$sale.prc, digits = 2, format = "d", big.mark = ","),
-                                       "<br> Floor Area (sqft):", formatC(HouseInf$tot.lvg.area, digits = 0, format = "d",big.mark = ",")), 
-                        group = "HouseInf", 
-                        layerId = ~ index)
-  })
-  
-  # # Borough Filter
-  # priceInputs <- reactive({
-  #   price <- subset(housing.subset, price.range == input$property.price)
-  #   
-  #   return(price)
-  # })
-  # 
-  # 
-  # observe({
-  #   price <- priceInputs()
-  #   
-  #   leafletProxy("map", data = price) %>%
-  #     clearGroup(group = "price") %>%
-  #     addPolygons(popup = ~paste0("<b>", price.range, "</b>"), group = "price", layerId = ~sale.prc, fill = FALSE, color = "green") %>%
-  #     setView(lng = price$long, lat = price$lat, zoom = 9)
-  # })
-  
-  
-  # # Add trolley routes to the map
-  # observe({
-  #   HouseInf <- housing.subset()
-  #   trolley <- st_as_sf(trolley.load$geometry)
-  #   #pal <- colorNumeric(palette = "Reds", domain = trolley.load$NAME)
-  #   leafletProxy("map", data = trolley) %>%
-  #       clearShapes() %>%
-  #       addPolylines()
-  #      })
 
-  
-  
-  # # MIAMI MUNICIPALITIES - Adding Miami Municipalities to Map
-  # observe({
-  #   HouseInf <- housing.subset()
-  #   leafletProxy("map", data = municipality.load) %>%
-  #     clearGroup(group = "HouseInf") %>%
-  #     addPolygons(popup = ~paste0("<b>", NAME, "</b>"), group = "Municipality", layerId = ~MUNICID, fill = FALSE, color = "gray")
-  # })
-  # 
   
   # Create Bar Chart -------------------------------------------------
   output$bar.chart <- renderPlotly({
@@ -347,7 +416,6 @@ server <- function(input, output) {
   # # Create Pie Chart-------------------------------------------------
   
   output$pie.chart <- renderPlotly({
-    
     # Plotting the pie chart using plot_ly() function
     pie <- plot_ly(housing.subset(), values =  ~sale.prc, labels = ~price.range,
                    type = "pie",
