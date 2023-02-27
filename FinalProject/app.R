@@ -230,6 +230,11 @@ server <- function(input, output) {
              ocean.dist >= input$property.ocean.dist[1] & ocean.dist <= input$property.ocean.dist[2] & LABEL %in% input$neighborhood)
   })
   
+  # Data subset with reactive function for graphs 
+  neigh.subset <- reactive({
+    req(input$neighborhood)
+    filter(neigh.load, LABEL %in% input$neighborhood)
+  })
   
   
   # Create Map --------------------------------------------------------
@@ -241,6 +246,7 @@ server <- function(input, output) {
       setView(-80.191788, 25.761681, 12) %>%
       addLayersControl(baseGroups = c("Google", "Wiki"))
                        #baseLayers = c("Properties", "Neighborhoods"))
+  
   })
   
   
@@ -258,18 +264,27 @@ server <- function(input, output) {
                                        "<br> Floor Area (sqft): ", formatC(HouseInf$tot.lvg.area, digits = 0, format = "d",big.mark = ",")), 
                         group = "Properties", 
                         layerId = ~ index)
-    
+      
   })
-  
   
   # # MIAMI NEIGHBORHOODS
   observe({
-    HouseInf <- housing.subset()
-    leafletProxy("map", data = HouseInf) %>%
+    neighInf <- neigh.subset()
+    leafletProxy("map", data = neighInf) %>%
       clearGroup(group = "Neighborhoods") %>%
-      addPolygons(popup = ~paste0("<b>", LABEL, "</b>"), group = "Neighborhoods", layerId = ~LABEL, fill = FALSE, color = "gray")
+      addPolygons(popup = ~paste0("<b>", LABEL, "</b>"), group = "Neighborhoods", layerId = ~LABEL, fill = FALSE, color = "black")
 
   })
+  
+  
+  # # # MIAMI NEIGHBORHOODS
+  # observe({
+  #   HouseInf <- housing.subset()
+  #   leafletProxy("map", data = HouseInf) %>%
+  #     clearGroup(group = "Neighborhoods") %>%
+  #     addPolygons(popup = ~paste0("<b>", LABEL, "</b>"), group = "Neighborhoods", layerId = ~geometry, fill = FALSE, color = "gray")
+  #   
+  # })
   
   
   # # PROPERTY LAYER - Adding Properties layers to map using lat and long  
