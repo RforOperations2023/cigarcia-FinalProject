@@ -68,10 +68,7 @@ housing$index <- seq_along(housing$sale.prc)
 
 #IMPORTING SPATIAL DATA
 
-#Loading Municipalities (Polygons)
-#municipality.load <- rgdal::readOGR("https://services.arcgis.com/8Pc9XBTAsYuxx9Ny/arcgis/rest/services/Municipalitypoly_gdb/FeatureServer/0/query?outFields=*&where=1%3D1&f=geojson") %>%
-#  st_as_sf()
-
+#Loading  Neighborhoods (Polygons)
 neigh.load <- st_read("./Miami_Neighborhoods_Shapefile.geojson")
 
 
@@ -85,28 +82,30 @@ joined_sf <- st_join(housing_sf, neigh.load, join = st_within) %>%
   filter(!is.na(LABEL))
 
 
-#Creating  Icons
+#CREATING ICONS FOR PROPERTIES LAYER
 
 homeIcon <- awesomeIconList(
-  "Less than $100,000" = makeAwesomeIcon(icon = "home", library = "fa", markerColor = "red"),
+  "Less than $100,000" = makeAwesomeIcon(icon = "home", library = "fa", markerColor = "purple"),
   "$100,000 - $250,000" = makeAwesomeIcon(icon = "home", library = "fa", markerColor = "blue"),
   "$250,001 - $500,000" = makeAwesomeIcon(icon = "home", library = "fa", markerColor = "green"),
   "$500,001 - $1,000,000" = makeAwesomeIcon(icon = "home", library = "fa", markerColor = "orange"),
-  "More than $1,000,000" = makeAwesomeIcon(icon = "home", library = "fa", markerColor = "yellow")
+  "More than $1,000,000" = makeAwesomeIcon(icon = "home", library = "fa", markerColor = "red")
 )
 
+#USER INTERFACE
 
 # Define UI for application that plots features -----------
-ui <- navbarPage("Miami Housing Market 2016",
-                 theme = shinytheme("spacelab"),
+ui <- fluidPage(theme = shinythemes::shinytheme("simplex"),
+                 titlePanel(
+                   title = div(
+                     img(height = 90, width = 130, src = "Miami_realty.png"), HTML("<span style='font-weight: bold;'> Housing Market in Miami (2016)</span>")),
+                     windowTitle = "Header"),
+                 
+                 
                  # Sidebar layout with a input and output definitions --------------
                  sidebarLayout(
                    # Inputs: Select variables to plot ------------------------------
                    sidebarPanel(
-                     
-                     
-                     # # Select Miami Neighborhood
-                     
                      
                      # Set Age of the property ------------------------------------
                      sliderInput(inputId = "property.age",
@@ -132,10 +131,11 @@ ui <- navbarPage("Miami Housing Market 2016",
                                                     "More than $1,000,000"),
                                         selected = c("Less than $100,000", "$100,000 - $250,000", "$250,001 - $500,000", "$500,001 - $1,000,000", "More than $1,000,000")),
                      
+                     # Set neighborhood of the property -----------------------------
                      selectInput(inputId = "neighborhood",
                                  label = "Select one or more neighboorhods for all graphs, map and table:",
                                  choices = unique(sort(neigh.load$LABEL)),
-                                 selected = "Miami Avenue", 
+                                 selected = NA,
                                  multiple = TRUE),
                      
                      # Horizontal line for visual separation -----------------------
@@ -169,9 +169,14 @@ ui <- navbarPage("Miami Housing Market 2016",
                        
                        
                        # Plots Tab -------------------------------------------------
+                       
+                       
                        tabPanel("Plots",
+                                
+                                #Scatter plot
                                 h4("Market Analysis"),
                                 plotlyOutput(outputId = "scatterplot"),
+                                
                                 # Select variable for y-axis ----------------------------------
                                 selectInput(inputId = "y",
                                             label = "Plots - Market Analysis Y-axis:",
@@ -207,6 +212,8 @@ ui <- navbarPage("Miami Housing Market 2016",
                                 hr(),
                                 h4("Sale Price Distribution"),
                                 plotlyOutput(outputId = "pie.chart")
+                                
+                                
                        ),
                        
                        
@@ -220,85 +227,67 @@ ui <- navbarPage("Miami Housing Market 2016",
 
 
 
-# Define server function required to create the scatter plot ---------
-server <- function(input, output) {
+#SERVER
+
+# Define server function required to create the scatter plot -------------------
+server <- function(input, output, session) {
   
-  # Data subset with reactive function for graphs 
+  # Data subset with reactive function for graphs, table and map
   housing.subset <- reactive({
     req(input$property.age, input$property.price, input$property.ocean.dist, input$neighborhood)
     filter(joined_sf, price.range %in% input$property.price & age >= input$property.age[1] & age <= input$property.age[2] & 
              ocean.dist >= input$property.ocean.dist[1] & ocean.dist <= input$property.ocean.dist[2] & LABEL %in% input$neighborhood)
   })
   
-  # Data subset with reactive function for graphs 
+  # Data subset with reactive function for neighborhood layer
   neigh.subset <- reactive({
     req(input$neighborhood)
     filter(neigh.load, LABEL %in% input$neighborhood)
   })
   
   
-  # Create Map --------------------------------------------------------
-  
+  # Create Google Map with Legend ----------------------------------------------
   output$map <- renderLeaflet({
     leaflet() %>%
       addTiles(urlTemplate = "http://mt0.google.com/vt/lyrs=m&hl=en&x={x}&y={y}&z={z}&s=Ga", attribution = "Google", group = "Google") %>%
       addProviderTiles(provider = providers$Wikimedia, group = "Wiki") %>%
       setView(-80.191788, 25.761681, 12) %>%
-      addLayersControl(baseGroups = c("Google", "Wiki"))
-                       #baseLayers = c("Properties", "Neighborhoods"))
-  
+      addLayersControl(baseGroups = c("Google", "Wiki")) %>%
+      addLegend("bottomright", 
+                title = "Property Price Range", 
+                #values = ~price.range,
+                colors = c("purple", "blue", "green", "orange", "red"),
+                labels = c("$0-$100K", "$100K-$250K", "$250K-$500K", "$500K-$1M", "$1M+"))
+
   })
+
   
-  
-  # LAYERS
-  
-  # PROPERTY CLUSTERS - Creating clusters based on price range 
+ # PROPERTY CLUSTERS - Creating clusters based on price range and point data----
   observe({
-    HouseInf <- housing.subset()
-    leafletProxy("map", data =  HouseInf) %>%
-      clearGroup(group = "Properties") %>%
-      clearMarkerClusters() %>%
-      addAwesomeMarkers(icon = ~homeIcon[price.range], 
-                        clusterOptions = markerClusterOptions(), 
-                        popup = paste0("Sale Price ($): ", formatC(HouseInf$sale.prc, digits = 2, format = "d", big.mark = ","),
+      HouseInf <- housing.subset()
+      leafletProxy("map", data =  HouseInf) %>%
+        clearGroup(group = "Properties") %>%
+        clearMarkerClusters() %>%
+        addAwesomeMarkers(icon = ~homeIcon[price.range], 
+                          clusterOptions = markerClusterOptions(), 
+                          popup = paste0("Sale Price ($): ", formatC(HouseInf$sale.prc, digits = 2, format = "d", big.mark = ","),
                                        "<br> Floor Area (sqft): ", formatC(HouseInf$tot.lvg.area, digits = 0, format = "d",big.mark = ",")), 
-                        group = "Properties", 
-                        layerId = ~ index)
-      
+                          group = "Properties", 
+                          layerId = ~index)
   })
+
   
-  # # MIAMI NEIGHBORHOODS
+ # MIAMI NEIGHBORHOODS - Creating neighborhoods layer using polygons------------
   observe({
-    neighInf <- neigh.subset()
-    leafletProxy("map", data = neighInf) %>%
-      clearGroup(group = "Neighborhoods") %>%
-      addPolygons(popup = ~paste0("<b>", LABEL, "</b>"), group = "Neighborhoods", layerId = ~LABEL, fill = FALSE, color = "black")
+      neighInf <- neigh.subset()
+      leafletProxy("map", data = neighInf) %>%
+        clearGroup(group = "Neighborhoods") %>%
+        addPolygons(popup = ~paste0("<b>", LABEL, "</b>"), group = "Neighborhoods", layerId = ~LABEL, fill = FALSE, color = "black")
 
   })
   
   
-  # # # MIAMI NEIGHBORHOODS
-  # observe({
-  #   HouseInf <- housing.subset()
-  #   leafletProxy("map", data = HouseInf) %>%
-  #     clearGroup(group = "Neighborhoods") %>%
-  #     addPolygons(popup = ~paste0("<b>", LABEL, "</b>"), group = "Neighborhoods", layerId = ~geometry, fill = FALSE, color = "gray")
-  #   
-  # })
-  
-  
-  # # PROPERTY LAYER - Adding Properties layers to map using lat and long  
-  # observe({
-  #   HouseInf <- housing.subset()
-  #   layer1<- leafletProxy("map", data = HouseInf) %>%
-  #     clearMarkers() %>%
-  #     addAwesomeMarkers(data = HouseInf, ~long, ~lat, popup = paste0("Sale Price ($):", formatC(HouseInf$sale.prc, digits = 2, format = "d", big.mark = ","),
-  #                                                                   "<br> Floor Area (sqft):", formatC(HouseInf$tot.lvg.area, digits = 0, format = "d",big.mark = ",")))
-  # })
-  
-  
-  
-  # Create Bar Chart -------------------------------------------------
+  # Create Bar Chart -----------------------------------------------------------
   output$bar.chart <- renderPlotly({
     ggplotly(
       ggplot(data = housing.subset(), aes(x = month.sold.name)) +
@@ -315,7 +304,7 @@ server <- function(input, output) {
   })
   
   
-  # Create scatter plot ----------------------------------------------
+  # Create scatter plot --------------------------------------------------------
   output$scatterplot <- renderPlotly({
     ggplotly(
       ggplot(data = housing.subset(), aes_string(x = input$x, y = input$y)) +
@@ -331,7 +320,7 @@ server <- function(input, output) {
   )
   
   
-  # # Create Pie Chart-------------------------------------------------
+  # # Create Pie Chart----------------------------------------------------------
   
   output$pie.chart <- renderPlotly({
     # Plotting the pie chart using plot_ly() function
@@ -341,20 +330,20 @@ server <- function(input, output) {
                    hovertemplate = "<b>%{label}</b><br>Percent of total: %{percent}<extra></extra>")
     
     return(pie)
-    
+
   })
   
-  
-  # Print data table------------------------------------------------------
+  # Print data table for specific columns and formated -------------------------
   output$table <- DT::renderDataTable(
     if(input$show_data){
-      DT::datatable(data = housing.subset()[3:14], 
-                    options = list(pageLength = 20, scrollX = TRUE), # add scrollX option
+      DT::datatable(data = housing.subset()[, c(1:12)],
+                    options = list(pageLength = 20, scrollX = TRUE),
                     rownames = FALSE,
                     colnames = c('parcel no' = 'parcel.no', 'sale price' = 'sale.prc', 
                                  'land area' = 'lnd.sqft', 'floor area' = 'tot.lvg.area', 'special features value' = 'spec.feat.val', 
-                                 'rail dist' = 'rail.dist', 'ocean dist' = 'ocean.dist', 'water dist' = 'water.dist', 'business center dist' = 'cntr.dist',
-                                 'sub-center dist' = 'subcntr.di', 'highway dist' = 'hw.dist', 'property age' = 'age'))  %>% 
+                                 'rail dist' = 'rail.dist', 'ocean dist' = 'ocean.dist', 'water dist' = 'water.dist', 
+                                 'business center dist' = 'cntr.dist','sub-center dist' = 'subcntr.di', 'highway dist' = 'hw.dist', 
+                                 'property age' = 'age')) %>% 
         formatCurrency('sale price', "$") %>% 
         formatCurrency(c('land area', 'floor area','special features value','rail dist','ocean dist','water dist', 
                          'business center dist', 'sub-center dist', 'highway dist'), "")%>% 
