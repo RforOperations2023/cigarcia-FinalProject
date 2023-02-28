@@ -5,9 +5,10 @@ account: cigarcia
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 8439448
-bundleId: 6899593
+bundleId: 6899605
 url: https://cigarcia.shinyapps.io/cigarcia_FinalProject/
-when: 1677622870.02431
-lastSyncTime: 1677622870.02431
+when: 1677623095.07308
+lastSyncTime: 1677623095.07308
 asMultiple: FALSE
 asStatic: FALSE
+ignoredFiles: Miami_Neighborhoods_Shapefile.geojson|Miami_Neighborhoods
