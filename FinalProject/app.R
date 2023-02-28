@@ -79,8 +79,7 @@ housing_sf <- st_as_sf(housing, coords = c("long", "lat"), crs = 4326)
 
 #Joining data sets
 joined_sf <- st_join(housing_sf, neigh.load, join = st_within) %>% 
-  filter(!is.na(LABEL))
-
+  filter(!is.na(LABEL))   
 
 #CREATING ICONS FOR PROPERTIES LAYER
 
@@ -260,7 +259,6 @@ server <- function(input, output, session) {
                 #values = ~price.range,
                 colors = c("purple", "blue", "green", "orange", "red"),
                 labels = c("$0-$100K", "$100K-$250K", "$250K-$500K", "$500K-$1M", "$1M+"))
-
   })
 
   
@@ -338,19 +336,22 @@ server <- function(input, output, session) {
   # Print data table for specific columns and formated -------------------------
   output$table <- DT::renderDataTable(
     if(input$show_data){
-      DT::datatable(data = housing.subset()[, c(1:12)],
+      #housing.updated <- housing.subset() %>%
+      HouseInf <- housing.subset()
+      st_geometry(HouseInf) <- NULL
+      DT::datatable(data = HouseInf[, c(1:12)],
                     options = list(pageLength = 20, scrollX = TRUE),
                     rownames = FALSE,
                     colnames = c('parcel no' = 'parcel.no', 'sale price' = 'sale.prc', 
                                  'land area' = 'lnd.sqft', 'floor area' = 'tot.lvg.area', 'special features value' = 'spec.feat.val', 
                                  'rail dist' = 'rail.dist', 'ocean dist' = 'ocean.dist', 'water dist' = 'water.dist', 
                                  'business center dist' = 'cntr.dist','sub-center dist' = 'subcntr.di', 'highway dist' = 'hw.dist', 
-                                 'property age' = 'age')) %>% 
+                                 'property age' = 'age')) %>%
         formatCurrency('sale price', "$") %>% 
         formatCurrency(c('land area', 'floor area','special features value','rail dist','ocean dist','water dist', 
                          'business center dist', 'sub-center dist', 'highway dist'), "")%>% 
         formatRound(c('land area', 'floor area','special features value','rail dist','ocean dist','water dist', 
-                      'business center dist', 'sub-center dist', 'highway dist'), 1)
+                      'business center dist', 'sub-center dist', 'highway dist'), 0)
     }
   )
   

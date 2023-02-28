@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="UTF-8"?><metadata>
+    <idinfo>
+        <citation>
+            <citeinfo>
+                <origin/>
+                <pubdate>19891108</pubdate>
+                <title>esde1.ADM.Municipality_poly</title>
+                <geoform>vector digital data</geoform>
+            </citeinfo>
+        </citation>
+        <descript>
+            <abstract>A polygon feature class of municipal boundaries within Miami-Dade County, data includes the municipal codes and names.Updated: As Needed The data was created using: Projected Coordinate System: WGS_1984_Web_Mercator_Auxiliary_SphereProjection: Mercator_Auxiliary_Sphere</abstract>
+            <purpose>A polygon feature class of municipal boundaries within Miami-Dade County, data includes the municipal codes and names.</purpose>
+            <supplinf>Miami-Dade County, previously known as Dade County, Home Rule Charter was adopted May 21, 1957.
+  
+Municipalities created after the Home Rule Charter, legal description can be found on www.municode.com.  Click on Municode Library tab, select State, click on Miami-Dade County then click on Miami - Dade County Code of Ordinances.  To the left of the page scroll down to Appendix A (contains the creation of Municipalities after the Home Rule) and Appendix B (contains Annexation and De-annexation after the Home Rule).
+ 
+Municipalities created prior to the Home Rule, were processed through the Florida State Legislation, until the formation of Miami Dade County.  To obtain a copy of their legal description one would need go to the City's Clerk or use the above mentioned website, but click on the City of interest instead of Miami Dade County and you may find their Charter.
+
+Home Rule is a constitutional delegation to Miami-Dade County of specific decision making powers and authority which were formerly reserved to the state, subject to a county charter as approved by the voters of Miami-Dade County.  See: Sections 6(e) and 11 of Article VIII of the Constitution of the State of Florida, http://www.flsenate.gov/Statutes/index.cfm?Mode=Constitution&amp;Submenu=3&amp;Tab=statutes  
+
+A copy of Miami Dade County Home Rule Charter can be found at http://www.miamidade.gov/charterreview/ or http://www.miamidade.gov/charter/library/Charter-01-26-07.pdf
+
+Procedures_Used:
+The municipality legal description was provided to us and using ArcInfo tool ArcEdit, along with our base LOT layer and Digital Orthophotography the boundaries were drawn.  The Street Network was also used.
+
+Also, the boundaries are the same as those found in the REDI Plat Volumes with other references from the Official Map of Miami-Dade County Florida, 1989, and the shoreline coverage.  The Rand McNally Miami Metro map was used originally.
+
+Revisions:
+Date: April 2022     By: Alexander Mattis
+Reason: A portion of the East 1/2 of Section 12, Township 52 South, Range 41 East, and a portion 
+of the N.W. 1/4 of Section 7, Township 52 South, Range 42 East, Miami-Dade County Florida, which
+lies Northwesterly of the Northwesterly Right of Way line of the Tri-Rail Railroad (formerly CSX
+Railway, formerly the Seaboard Airline Railroad) and Northwesterly of the Northwesterly Right
+of Way line of State Road No. 9 as shown on the plat thereof recorded in Plat Book46at Page 62
+of the Public Records of Miami-Dade County, being more particularly described as follows:
+
+BEGINNING at the NW corner of the NW 1/4 of said Section 7; thence run N89⁰29’12"E, along
+the North line of the NW 1/4 of said Section 7, for 332.61 feet to a point being also the SW corner
+of the East 1/2 of the SW 1/4 of the SW 1/4 of the SW 1/4 of Section 6, Township 52 South, Range
+42 East, said point lying in the centerline of Miami Gardens Drive as shown on that certain plat of
+MIAMI INDUSTRIAL DISTRICT SECTION FOUR, as recorded in Plat Book 72 at Page 25 of
+the Public Records of Miami-Dade County, Florida; thence run S00⁰43’13”E, along the Southerly
+extension of the West line of the East 1/2 of the SW 1/4 of the SW 1/4 of the SW 1/4 of said
+Section 6, for 35.00 feet; thence run N89⁰29’12”E, along a line parallel to and 35.00 feet South of,
+as measured at right angles to the North line of the NW 1/4 of said Section 7, for 67.24 feet to a
+point of curvature of a circular curve to the right; thence run Southeasterly along said curve to the
+right, having a radius of 602.28 feet, through a central angle of 45⁰11’20”, for an arc distance of
+475.02 feet to the point of tangency; thence run S45⁰19’28”E for 393.47 feet to the point of
+intersection with a line parallel to and 185 feet Northwesterly of, as measured at right angles to the
+Southeasterly Right of Way line of the Tri-Rail Railroad; thence continue S45⁰19’28”E, along the
+Southeasterly extension of said line parallel to and 35.00 feet South of, over and across said Tri-
+Rail Railroad, for 185.63 feet to the point of curvature of a circular curve to the left from which
+the radius point bears S29⁰22’00”W; thence Southeasterly and Easterly along said curve to the left
+being also the centerline of Miami Gardens Drive and Access Road as shown on the plat thereof
+recorded in Plat Book 65 at Page 64 of the Public Records of Miami-Dade County, having a radius
+of 672.28 feet, through a central angle of29⁰50’02”, for an arc distance of 350.06 feet to the point
+of tangency; thence run S89⁰25’56”W, along said centerline of Miami Gardens Drive and Access
+Road, for a distance of 513.35 feet to the point of intersection with the Northwesterly Right-of-
+Way line of State Road No. 9; thence leaving direction run S49⁰23’42”W, along the Northwesterly
+Right-of-Way line of said State Road No. 9, for a distance 609.93 feet to a point of curvature of a
+circular curve to the right; thence continue Southwesterly, along the said curve to the right, having
+a radius of 2764.93 feet, through a central angle of 22⁰29’40”, for an arc distance of 1,085.52 feet
+to the point of tangency; thence run S71⁰53’22”W along the Northwesterly Right-of-Way line of
+said State Road No. 9 for a distance of 1053.41 feet to the Southeasterly Right of Way line of the
+Tri-Rail Railroad; thence continue S71⁰53’22”W, along the Southwesterly extension of the
+North westerly Right-of-Way line of said State Road No. 9 through said Tri-Rail Railroad Right-
+of-Way, for a distance of 261.32 to the Northwesterly Right-of-Way line of the 100 foot wide Tri-
+Rail Railroad Right-of-Way; thence run S49⁰23’22”W, along the Northwesterly Right-of-Way
+line of the 100 foot wide Tri-Rail Railroad Right-of-Way, for 2077.48 feet to the Southeasterly 
+corner of Tract 1-A of that certain Plat of MIAMI INDUSTRIAL DISTRICT SECTION ONE, as
+shown on the plat thereof recorded in Plat Book 62 at Page 6 of the Public Records of Miami -Dade
+County - Florida; thence leaving direction run Northeasterly along a curve to the left being also the
+Easterly boundary of said Tract 1-A having a radius of 507.06 feet, through a central angle of
+24⁰14’32” for an arc distance of 214.54 feet to the point of tangency; thence run N00⁰46’20”W
+along the Easterly line of said Tract 1-A and the Easterly line of Tract 2-A of that certain Plat of
+MIAMI INDUSTRIAL DISTRICT SECTION TWO, as shown on the plat thereof recorded in Plat
+Book 63 at Page 25 of the Public Records of Miami -Dade County, Florida, for 801.43 feet to the
+point of intersection with the centerline of NW 176th Street; thence run N89⁰43’56”E, along the
+centerline of NW 176th Street, for 470.68 feet to the point of intersection with the centerline of
+NW Miami Court, as shown on said Plat of MIAMI INDUSTRIAL DISTRICT SECTION FOUR;
+thence run N00⁰44’59”W. along said centerline of NW Miami Court, for 2,360.00 feet to the point
+of intersection with the North line of the NE 1/4 of the said Section 12 being also the centerline of
+Miami Gardens Drive as shown on said Plat of MIAMI INDUSTRIAL DISTRICT SECTION
+FOUR; thence run N89⁰43’56”E along the North line of the NE 1/4 of said Section 12 being also
+the centerline of Miami Gardens Drive, for 1,669.38 feet to the POINT OF BEGINNING
+
+Date: December 2021 By: Alexander Mattis
+Reason: December 14, 2021 Interlocal Agreement Sweetwater West Annexation. This Interlocal Agreement (the "Agreement") is entered into this14th day of December 2021, by and between Miami-Dade County, Florida ("County") and the City of Sweetwater ("City"), a Florida municipal corporation.Whereas, section 6.04 of the Home Rule Charter for Miami-Dade County authorizes the County to approve changes to municipal boundaries; and Whereas, the City desires to change its boundary to include and annex the tract of land described in the accompanying ordinance, and in Exhibit A attached hereto and made a part hereof, which is known as the West Annexation Area (the "Annexed Property"); and Whereas, the City has made certain representations to the County in conjuction with, and as part of the consideration of, its annexation application for the Annexed Property, includng but not limited to, a representation that the City desires for the Annexed Property will so remain; and Whereas, the County has relied upon those representations in exercising its discretion to permit the annexation of the Annexed Property; and Whereas, to memorialize those representations and to provide for points of compromise and other matters, the County and the City wish to enter into this Agreement; and Whereas, pursuant to this Agreement, the City will assume municipal-type services once the annexation has been approved, and the County will retain certain functions, responsibilities, rights, and obligations, as set forth herein
+
+Date: March 2021    By: Alexander Mattis
+Reason: July 21, 2020 the Board of County Commissioners approved the annexation of the City of North Miami, Florida and amending the City's municipal charter to provide for the annexation of certain lands, pursuant to section 6.04(b) of the Home Rule Charter and chapter 20 of the Code; relating to area referred to as Gratigny-Dixie. Described as the unincorporated area northwest of West Dixie Highway/Harriet Tubman Highway, bounded on the north of Biscayne Canal and on the south by NE 119 Street, and Area 2, generally described as the unincorporated area bounded on the north by NE 121 Street, on the east by NE 1 Avenue, on the south by NE 119 Street and on the west by the City of North Miami city limits. Annexation of the City of North Miami as per Ordinance No. 20-107
+
+Date: July 2014     By: Jeffrey Ruiz
+Reason:  On July 1, 2014 the Board of County Commissioners approved the annexations of El Portal and Doral and also approved the separation of Sweetwater. The Mayor did not veto these actions, therefore the effective date of these annexations is July 10, 2014.  Annexation of El Portal as per Ordinance 14-69, and Annexation of Doral / Separation of Sweetwater as per Ordinance 14-68.
+
+El Portal - Legal Description 
+A portion of land lying in Section 1, Township 53 South, Range 41 East, of Miami-Dade County Florida, more particularly described as the South 1171.8 feet more or less of the East 605.5 feet more or less of said Tract 2 of “Amended Plat a Portion of Miami Shores Section 6” as recorded in Plat Book 35 of Page 25 of the Public Records of Miami-Dade County, Florida. 
+and, 
+A portion of land lying in Section 7, Township 53 South, Range 42 East, of Miami-Dade County Florida, more particularly described as all of lot 4 of “Tuttles Subdivision” as recorded in plat book B of Page 3 of the Public Records of Miami Dade County; except the East 185 feet. 
+
+encompassing an area described by Resolution No. R-2012-022, passed and adopted by the Village Council of the Village of El Portal, which is attached hereto as Attachment A and made a part hereof by reference. A map depicting the annexed areas is attached hereto as Attachment B and made a part hereof by reference. In the event of any inconsistency between the boundaries of the annexation areas as described by the legal description and the map identified as Attachment B, the boundaries of the annexation areas as described by the legal description shall prevail. 
+
+Doral annexation / Sweetwater separation – Legal Description
+
+The municipal boundaries of the City of Sweetwater are hereby changed and reduced by the separation of the following property and the municipal boundaries of the City of Doral are hereby changed and enlarged by the annexation of the following property: 
+Separation from the City of Sweetwater 
+Annexation to the City of Doral 
+
+Legal Description 
+BEGIN at the Northeast Corner of Section 31, Township 53 South, Range 40 East, Miami-Dade County, Florida; thence S01 '43'22" E along the East Line of the Northeast One-Quarter of said Section 31 for 95.03 feet to a point on a line parallel with and 95.00 feet South of the North Line of the Northeast One-Quarter of said Section 31; thence S89'37'00"W along said line parallel with and 95.00 feet South of the North Line of the Northeast One-Quarter of said Section 31 for 2,635.56 feet to a point on the East Line of the Northwest One-Quarter of said Section 31; thence S89'37'28"W along a line parallel with and 95.00 feet South of the North Line of the Northwest One- Quarter of said Section 31 for 2,635.51 feet to a point on the West Line of the Northwest One-Quarter of said Section 31; thence N01'44'1 O"W along said West Line of the Northwest One-Quarter of said Section 31 for 95.03 feet to the Northwest Corner of said Section 31; thence N89'37'28"E along the North Line of the Northwest One-Quarter of said Section 31 for 2,635.53 feet to the North One-Quarter Corner of said Section 31; thence N89'37'00"E along the North Line of the Northeast One- Quarter of said Section 31 for 2,635.57 feet to the Northeast Corner of said Section 31; said point also being the Point of Beginning. 
+
+
+encompassing an area described by Resolution No. 3708 passed and adopted by the City Commission of the City of Sweetwater authorizing the separation of such property and Resolution No. 12-94 passed and adopted by the City Commission of the City of Doral authorizing the annexation of such property, which resolutions are attached hereto as Attachment A and Attachment B respectively and made a part hereof by reference. A map depicting the areas area separated from the City of Sweetwater and annexed to the City of Doral is attached hereto as Attachment C and made a part hereof by reference. In the event of any inconsistency between the boundaries of the area as described by the legal description and the map identified as Attachment C, the boundaries of the area described by the legal description shall prevail. 
+Section 2. The charters of the City of Sweetwater and the City of Doral are herby amended to reflect the boundary changes approved in Section 1 of this ordinance. 
+Section 3. It is the intention of the Board of County Commissioners, and it is hereby ordained that the provisions of this ordinance, including any sunset provision, shall become and be made a part of the Code of Miami-Dade County, Florida. The sections of this ordinance may be renumbered or relettered to accomplish such intention, and the word "ordinance" may be changed to "section," "article," or other appropriate word. 
+Section 4. The provisions of this Ordinance are interdependent upon one another, and the entire ordinance shall be deemed invalid if any of its provisions are declared invalid or unconstitutional. If any of the sections of this ordinance are found or adjudged to be illegal, void or of no effect, the entire ordinance shall be null and void and of no force or effect. 
+
+
+Date: January 2014     By: Jeffrey Ruiz
+Reason: To add the field FIPSCODE.
+
+Date: April 2013     By: Jeffrey Ruiz
+Reason: North Miami Annexation. A portion of Miami-Dade County, Florida, lying South of NE 135 Street, North of NE 131 Street, East of the Biscayne Canal and West of NE 4 Avenue, more particularly described as the NW 1/4, of the NW 1/4, of Section 30, Township, 52, Range 42 East.
+
+Date: May 9th, 2012    By: Jeffrey Ruiz
+Reason: Miami-Dade County Board of County Commissioners adopted Ordinance No. 12-14 abolishing the City of Islandia (munic code 29).  This ordinance became effective March 16, 2012.  The area is now considered Unincorporated Miami-Dade.
+
+Date: December 15, 2010   By: N. Alvarez, Jeffrey Ruiz
+Reason: Sweetwater SubArea1-3-4 Annexation. The municipal boundary of the City of Sweetwater is hereby changed, extended and enlarged, and the charter of such municipality is hereby amended by the annexation to the City of Sweetwater of the following property:
+Portions of Section 31, Township 53 South, Range 40 East, Section 6, Township 54 South, Range 40 East and Government Lot 6, between Townships 53 and 54 South, Range 40 East, lying in Miami-Dade County, Florida.
+
+Date: August 2010               By: N. Alvarez 
+Reason: Realigned small portion of City of Miami boundary, along the north line of the South one-fourth (S 1/4) of Section 28 of Township Fifty-four (54) South, Range Forty-one (41).
+
+Date: July 2010                    By: N. Alvarez
+Reason: Realigned small portion of  North Miami Beach boundary between Lot A  (PB 66-19) and Lot G  (PB 73-49). 
+
+Date: June 2010                  By: N. Alvarez
+Reason: To align south boundary of El Portal, along the North shore line of Little River using 2008 Woolpert Water FC. 
+
+Date: March 2010                By: B. Oung
+Reason: To include the above Home Rule and legal description source in the metadata.
+
+Date: December 8th, 2009   By: Alex Guzman
+Reason:  Added the OmegaGIS Metadata Stylesheet with the following parameters in order for the MDPD Omega CrimeView Density Map function to operate properly:
+
+Feature Class: Municipality_poly
+Registered Type: OTHER
+Default Field: NAME
+Report: Density_Municipality.rpt
+
+Date: June 2009                   By: N.Alvarez, Jeffrey Ruiz
+Reason: Corrected Municipal boundary of Pinecrest and Coral Gables at SW 57 AVE as per Pinecrest Corporate Boundary. Also cleaned up many annotations in South Miami, Coral Gables, and Unincorporated Miami-Dade.
+
+Date: June 2009                   By: N. Alvarez, Jeffrey Ruiz
+Reason:  The municipality boundary of the City of Homestead is hereby changed, extended, and enlarged and the charter of such municipality is hereby amended by the annexation to the City of Homestead of the following property:
+The Southeast 1/4 of the Southwest 1/4 of Section 14, Township 57 South, Range 38 East in Miami-Dade County, Florida; bounded on the South by SW 328th St. (also known as Lucy St. or SW 8th St.); bounded on the West by SW 194th Ave.; bounded on the North by SW 324th St.; bounded on the East  by SW 192nd Ave. (also known as Tower Road or Longview Road or SW 18th Ave.).
+
+Date: December 2008          By: N. Alvarez, Jeffrey Ruiz
+Reason:  The municipal boundary of Miami Shores Villas is hereby changed, extended, and enlarge, and the charter of such municipality is hereby amended by the annexation to Miami shores Village of the following property:
+That portion of Miami-Dade County, Florida in Section 36, Township 52, Range 41 East, Bounded on the North by the centerline of NW 115th St., on the South by centerline of NW 111th St., on the West by the Easterly limited access right of way line of I 95, on the East by the existing boundary of the Village of Miami Shores along the centerline of NW 5th Ave. 
+
+Date: December 2008          By: N. Alvarez. Jeffrey Ruiz
+Reason: The municipal boundary of Florida City is hereby changed, extended, and enlarged by Florida City's Annexation Areas "G1, G2, and G3" generally described as follows:
+Area "G1": The SE ¼ of the SE ¼ of the SW ¼ less the South 30 feet for Road Right- of-way, of Section 25, Township 57 South, Rage 38 East.
+Area "G2": Lots 1 thru 50 of Blk 8, lots 1 thru 50 Blk 9, of the Florida City Realty company's Subdivision, according to the Plat thereof as recorded in Plat Book No 14, at Page 50.
+Area "G3":  East ½ of the NW ¼ of the NE ¼ of the SE ¼ of Section 25, township 57 south, Range 38 East. 
+
+Date: July 2008                  By: N. Alvarez. Jeffrey Ruiz
+Reason: The municipal boundary of the City of North Miami are hereby changed, extended and enlarged, and the charter of such municipality is hereby amended by the annexation to the City of North Miami of the following property: 
+That portion of the S1/2 of the NW1/4 of the SW1/4 of SW1/4 of Section 19, Township 52 South, Range 42 E, lying E of the centerline of NE 2nd Ave, (known as NE 2nd Ct.) as shown and delineated upon Deed Book 1952, Page 509.  And that portion of the S1/2 of the N1/2 of the NW1/4 of the SW1/4 of the SW1/4 Section 19, township 52 South, Range 42 E, lying E of the centerline of NE 2nd Ave. (known as NE 2nd Ct.) as shown and delineated upon Deed Book 1952, Page 509, of records, in Miami-Dade County, Public Record's , Florida.
+
+Date: June 2008                  By: N. Alvarez, Jeffrey Ruiz
+Reason: On July 3rd, 2008 the municipality boundaries of the City of Homestead was hereby changed, extended, and enlarged, and the charter of such municipality was hereby amended by annexation to the City of Homestead of the following property: COMBINED LEGAL DESCRIPTION ANNEXATION AREAS NW-1 &amp; NW-2 generally described as follows: NORTH: SW 288th St. (Biscayne Dr), SOUTH:  SW 304th St (Kings Hwy), EAST: SW 189th Ave., WEST: East one-half (E ½ )  of the northwest one-quarter (NW ¼) of the northwest one-quarter (NW ¼) of Section 573811.
+
+Date: May 2008                  By: N. Alvarez, Jeffrey Ruiz
+Reason: On May 28th, 2008 the municipal boundaries of the City of Florida City was hereby changed, extended, and enlarged, and the charter of such municipality was hereby amended by the annexation to the City of Florida City of the following property:  Florida City Annexation Area "F" generally described as follows: NORTH: SW 352nd St., SOUTH: SW 360th St.,  EAST: Krome Ave. (SW 177th Ave), State Road 5 (US-1) and Card Sound Road, WEST: Former East right-of-way line of the Florida East Coast Rail Road
+
+In addition, realigned City of South Miami by 59th Ave and 62nd St.; Biscayne Park by Biscayne Canal and NE 113th St. and Florida City intersection of S Krome Ave / Card Sound Rd.  Realignments did not affect property folios.
+
+Date: October 2006            By: GIS Technical Support Staff
+Reason: The data was converted from the legacy coverage format to the ArcGIS Geodatabase feature class format.
+
+Date: March 2006              By: N. Alvarez
+Reason:  To correct north limit of "Track A" located East of Biscayne Blvd and NE 162nd St., between the boundaries of North Miami and North Miami Beach. Updated the FLG = 1 for the Municipal boundary in pmunic.aat.
+
+Date: January 2006            By: N. Alvarez
+Reason:  The boundaries of Florida City is hereby changed (enlarge) by the "C1" annexation of certain lands located by the NORTH: SW 352nd St. and the City of Homestead limits, SOUTH: SW 376th St., EAST: West line of E 1/2 of SE 1/4 of section 573928 WEST: along centerline of Card Sound Road to the intersection with State Road 5 (US Highway Number 1).
+
+Date: November 2005         By: N. Alvarez
+Reason:  To add the incorporation of Cutler Ridge: A portion of Miami-Dade County, Florida generally bounded on the North by SW 184 St (the South boundary of the Village of Palmetto Bay), bounded on the South by SW 232 St, bounded on the East by Biscayne National Park and bounded on the West by the South Miami-Dade Transit Corridor (Bus Way) and SW 112 Avenue (Allapattah Road).  Updated the FLG = 1 for Municipal boundary in the .AAT.  To modify the name of Cutler Ridge to Cutler Bay as per November 8th 2005, charter and name change special election.
+
+Date: June 30 2004             By: N. Alvarez
+Reason:  To correct the municipal boundaries of the City of Miami Beach by certain lands lying and being on Fisher Island, Miami-Dade County and the separation of certain land of Fisher Island property from City of Miami Beach.
+
+Date: April 2004                  By: N. Alvarez
+Reason:  The boundaries of the City of Hialeah and Hialeah Gardens are hereby changed and enlarged by the annexation of certain lands.  Municipalities name abbreviated were changed to match table of Postal Services used by the CSR 311 system to validate addresses.  Boundaries effective  May 1st, 2004.
+
+Date: March  2004             By: N. Alvarez
+Reason:  To correct the limits between the City of Miami jurisdiction on Virginia Key and Miami-Dade County and  the City Property adjacent to and Southeast of Mast Academy is within the jurisdictional limits of Unincorporated Miami-Dade County. Ordinance #94-298 does not include the charter school.  Correction verified by Public Works/Right of Way Department
+
+Date: Oct. 2003               By: N. Alvarez
+Reason:  Aligned the boundary of Town of Medley lying Southwest of the centerline of the Miami Canal with the northerly R/W line of NW 74th Street lying within Section 11 Township 53 South Range 40 East.
+
+Date: July 2003               By: N. Alvarez
+Reason:  The boundaries of the Town of Medley and North Miami are hereby changed due to Medley and North Miami annexation of certain lands.
+
+Date: June 2003               By: N. Alvarez
+Reason:  To incorporate the municipality boundaries of Doral.
+
+Date: June 2003               By: N. Alvarez
+Reason:  The boundaries of the city of Coral Gables are hereby changed due to Kings Bay annexation to the City
+
+Date: May 2003                By: N. Alvarez
+Reason:  Added Miami Gardens boundary.  Aligned the centerline of NW 170 Ave - North of Miami Lakes boundary.
+
+Date: February 2003           By: N. Alvarez
+Reason:  Made corrections to the Miami Beach inlet area.
+
+Date: Dec.  2002              By: N. Alvarez
+Reason:  Corrected boundaries  of Miami Lakes (North, East and West) and added Tract "A" 35 feet between the boundaries of North Miami and Miami Dade County.
+
+Date: Oct, 2002               By: N. Alvarez
+Reason:  Aligned the coastline by Biscayne Park due to Palmetto Bay Incorporation.
+
+Date: Sept, 2002              By: N. Alvarez
+Reason:  Added Florida City Annexation at the W 1/4 corner of section 30, Township 57, Range 39.  Between State Road No. 5 and State Road No. 4a to the municipality of Florida City.
+-  Added the incorporation of Village of Palmetto Bay The corporate boundaries of the Village are: Northern   S.W. 136 Street and the City of Coral Gables, Eastern    City of Coral Gables and Biscayne Bay,  Southern   S.W. 184 Street,  Western    Centerline of U.S. 1 from 136 Street, southwesterly to S.W. 160 Street, then to the center line of southbound U.S. 1 from S.W. 160 Street to S.W. 184 Street.  Aligned the cost line by Biscayne Park.
+
+Date: July 2002               By: N. Alvarez
+Reason:  Aligned a small NW portion of Homestead, S boundary of Pinecrest, SE portion of Miami and the south coastline area.
+
+Date: June 2002               By: N. Alvarez
+The boundaries of the City of Coral Gables are hereby changed by the E 1/2 of SE 1/4 of the SW 1/4 of Section 30, Township 54, Range 41 E Less 250.00 feet there of in Miami Dade County.
+
+Date: May  2002               By: N. Alvarez
+Reason:  Changing the boundaries of the Town of Medley by the annexation of certain land located by the North - South bank Canal of Miami South - 122 St N.W., East - 107 Ave N.W. and West - Turnpike Extension excluding there from the right-of-way for said Homestead Extension of the Florida Turnpike.
+
+Date: August 6, 2001          By: N. Alvarez
+Reason:  On July 24, 2001 a new annexation to the City of Homestead was approved. Areas by the Northern Boundary: SW 288th Street (Biscayne Dr) Southern Boundary: Theoretical SW 308th Street (city limits) Eastern Boundary: SW 137th Avenue, Western Boundary: Homestead Extension of the Florida Turnpike.
+
+Date: January 2001            By: N. Alvarez
+Reason:  Aligned Miami Lakes SW area.
+
+Date: January 2001            By: A. Solis, N. Alvarez
+Reason:  To add the new city of Miami Lakes, update FLG in .AAT and update the .LUT tables.
+
+Date: October 2000            By: N. Alvarez
+Reason:  Move annotation for WASD away from manhole, from time to time.
+
+Date: February 2000           By:  N. Alvarez
+Reason:  Unsplited arcs in the SW line of Sunny Isle.
+
+Date: October 1999            By: N. Alvarez
+Reason:  Changed munic-name  'Unincorporated' to 'Unincorporated Miami-Dade'
+Metadata  B. Khan
+
+Date: June 1999               By: Nancy Alvarez
+Reason:  Aligned part of the  west side (State Road 9) of the city of North Miami Beach with the Zone layer.  Alignment did not affect the city boundaries.
+
+Date: May 7, 1999             By: Nancy Alvarez
+Reason:  To align the boundary of Homestead in the area of SW 168th Ave.  Between 304th St. and 307th St. Also, aligned the south limits of Sunny Isle. These changes did not affect the property layer boundaries.
+
+Date: February 1998           By: Nancy Alvarez
+Reason:  To change Coral Gables city limits.
+Metadata by: Nancy Alvarez and B. Khan
+
+Date: April 1998                  By: Nancy Alvarez
+Reason:  To incorporate the municipality boundaries for Sunny Isle
+
+Date: August 1996             By: Nancy Alvarez
+Reason:  To reflect new municipality's boundaries of Pinecrest.  Munic code is 20.   Aventura became a municipality for the 1996 withTax Roll code 28.  On Tuesday April 9, 1996, there was an election for the Pine Bay Estates Section of Pinecrest, which resulted in Coral Gables annexing this area from Pinecrest.
+
+Date: 1995                    By: Charlton Lewis
+Reason:  To incorporate the municipality boundaries and their extensions out into the bay beyond the actual shoreline.
+
+As of 12/28/1990, there was an effective annexation of the Medley municipality.  This includes the area between NW 83rd and NW 79th avenues that was previously a part of Dade County, it extends downward and is bordered by a lake on the south.  A second area of annexation is the tiny triangular portion, formerly a part of Dade, lying between the railroad and NW 82nd avenue.
+
+Reviews_Applied_to_Data:
+Data is reviewed by GIS Data Administrator and GIS Metadata Administrator.
+
+Other_References_Cited:
+Created by: Charlton Lewis of Miami-Dade County, on November 26th, 1990.
+
+The boundaries are the same as those found in the REDI Plat Volumes with other references from the Official Map of Dade County Florida, 1989, and the shoreline coverage.  The Rand McNally Miami Metro map was also used.
+
+Notes:
+Incorporation is done throught an election process.  The results can be found on the Miami-Dade County Elections Department website, after the votes have been casted and determined. The municipality is adopted and becomes effective immediately, providing it received the majority of votes.
+
+Annexations, with less than two hundred and fifty residence in the proposed area goes before the Board of County Commissioners, where it is accepted or withdrawn.  On the other hand, if the total affected residence is more than two hundred and fifty then, it goes through the election process mentioned above.
+
+Conditions for each Incorporation, Annexation or De-annexation could vary.
+
+Also, these items can be found in the Miami-Dade County, Legislative website.</supplinf>
+        </descript>
+        <timeperd>
+            <timeinfo>
+                <sngdate>
+                    <caldate>20211208</caldate>
+                </sngdate>
+            </timeinfo>
+            <current>Miami-Dade County, FL</current>
+        </timeperd>
+        <status>
+            <progress>In work</progress>
+            <update>As needed</update>
+        </status>
+        <spdom>
+            <bounding>
+                <westbc>-80.874379</westbc>
+                <eastbc>-80.039641</eastbc>
+                <northbc>25.979435</northbc>
+                <southbc>25.134519</southbc>
+            </bounding>
+        </spdom>
+        <keywords>
+            <theme>
+                <themekt>ISO 19115 Topic Categories</themekt>
+                <themekey>boundaries</themekey>
+                <themekey>planningCadastre</themekey>
+            </theme>
+            <place>
+                <placekt>None</placekt>
+                <placekey>Miami-Dade County, FL</placekey>
+            </place>
+        </keywords>
+        <accconst>None</accconst>
+        <useconst>Miami-Dade County provides this data for use "as is". The areas depicted by this map/data are approximate, and are not accurate to surveying or engineering standards. The maps/data shown here are for illustration purposes only and are not suitable for site-specific decision making. Information found here should not be used for making financial or any other commitments. Miami-Dade County provides this information with the understanding that it is not guaranteed to be accurate, correct or complete and conclusions drawn from such information are the sole responsibility of the user. While every effort has been made to ensure the accuracy, correctness and timeliness of materials presented, Miami-Dade County assumes no responsibility for errors or omissions, even if Miami-Dade County is advised of the possibility of such damage.</useconst>
+        <ptcontac>
+            <cntinfo>
+                <cntorgp>
+                    <cntorg>ITD</cntorg>
+                    <cntper>Miami-Dade County</cntper>
+                </cntorgp>
+            </cntinfo>
+        </ptcontac>
+        <ptcontac>
+            <cntinfo>
+                <cntorgp>
+                    <cntorg>Miami-Dade County, ITD</cntorg>
+                    <cntper>Alex Mattis</cntper>
+                </cntorgp>
+                <cntaddr>
+                    <addrtype>mailing</addrtype>
+                    <city>Miami</city>
+                    <state>FL</state>
+                    <postal>33173</postal>
+                    <country>US</country>
+                </cntaddr>
+                <cntvoice>(305) 596-8234</cntvoice>
+                <cntemail>Alexander.Mattis@miamidade.gov</cntemail>
+            </cntinfo>
+        </ptcontac>
+        <ptcontac>
+            <cntinfo>
+                <cntorgp>
+                    <cntorg>Miami-Dade County, OSBM</cntorg>
+                    <cntper>Jorge Fernandez</cntper>
+                </cntorgp>
+                <cntaddr>
+                    <addrtype>mailing</addrtype>
+                    <city>Miami</city>
+                    <state>FL</state>
+                    <postal>33128</postal>
+                    <country>US</country>
+                </cntaddr>
+                <cntvoice>(305) 375-1543</cntvoice>
+                <cntemail>jjorge@miamidade.gov</cntemail>
+            </cntinfo>
+        </ptcontac>
+        <datacred>Miami-Dade County GIS Technical Support Group</datacred>
+        <native> Version 6.2 (Build 9200) ; Esri ArcGIS 10.7.1.11595</native>
+    </idinfo>
+    <dataqual>
+        <complete>A legal description that went before the BCC and past determine changes to this data unless, it is a correction.</complete>
+    </dataqual>
+    <spdoinfo>
+        <direct>Vector</direct>
+        <ptvctinf>
+            <sdtsterm>
+                <sdtstype>GT-polygon composed of chains</sdtstype>
+                <ptvctcnt>78</ptvctcnt>
+            </sdtsterm>
+        </ptvctinf>
+    </spdoinfo>
+    <eainfo>
+        <detailed>
+            <enttyp>
+                <enttypl>esde1.ADM.Municipality_poly</enttypl>
+            </enttyp>
+            <attr>
+                <attrlabl>OBJECTID</attrlabl>
+                <attrdef>Internal feature number.</attrdef>
+                <attrdefs>ESRI</attrdefs>
+                <attrdomv>
+                                        
+                    <udom>Sequential unique whole numbers that are automatically generated.</udom>
+                                    
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>MUNICUID</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>MUNICID</attrlabl>
+                <attrdef>Municipal ID</attrdef>
+            </attr>
+            <attr>
+                <attrlabl>NAME</attrlabl>
+                <attrdef>Municipal name</attrdef>
+            </attr>
+            <attr>
+                <attrlabl>FIPSCODE</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>CREATEDBY</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>CREATEDDATE</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>MODIFIEDBY</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>MODIFIEDDATE</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>GlobalID</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>SHAPE</attrlabl>
+                <attrdef>Feature geometry.</attrdef>
+                <attrdefs>ESRI</attrdefs>
+                <attrdomv>
+                                        
+                    <udom>Coordinates defining the features.</udom>
+                                    
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>SHAPE.STArea()</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>SHAPE.STLength()</attrlabl>
+            </attr>
+        </detailed>
+        <detailed>
+            <enttyp>
+                <enttypl>ADMD.Municipality_polyHasAnno</enttypl>
+            </enttyp>
+        </detailed>
+        <detailed>
+            <enttyp>
+                <enttypl>MDC.MunicIsPartOfAddressZones</enttypl>
+            </enttyp>
+        </detailed>
+        <detailed>
+            <enttyp>
+                <enttypl>MDC.Municipality_polyHasAnno</enttypl>
+            </enttyp>
+        </detailed>
+        <overview>
+            <eaover>NAME                                       MUNICID
+==========                           ==========
+MIAMI                                                1
+MIAMI BEACH                                   2
+CORAL GABLES                               3
+HIALEAH                                           4
+MIAMI SPRINGS                               5
+NORTH MIAMI                                  6
+NORTH MIAMI BEACH                     7
+OPA-LOCKA                                      8
+SOUTH MIAMI                                  9
+HOMESTEAD                                 10
+MIAMI SHORES                              11
+BAL HARBOUR                               12                    
+BAY HARBOR ISLANDS                 13
+SURFSIDE                                       14                          
+WEST MIAMI                                   15
+FLORIDA CITY                                 16
+BISCAYNE PARK                             17
+EL PORTAL                                      18
+GOLDEN BEACH                              19
+PINECREST                                      20
+INDIAN CREEK VILLAGE                  21
+MEDLEY                                            22
+NORTH BAY VILLAGE                      23
+KEY BISCAYNE                                 24
+SWEETWATER                                 25
+VIRGINIA GARDENS                         26
+HIALEAH GARDENS                         27
+AVENTURA                                       28
+UNINCORPORATED MIAMI-DADE   30
+SUNNY ISLES                                    31
+MIAMI LAKES                                     32
+PALMETTO BAY                                33
+MIAMI GARDENS                              34
+DORAL                                               35
+CUTLER BAY                                     36
+
+Note: ISLANDIA (29) was abolished on March 6th, 2012.</eaover>
+        </overview>
+    </eainfo>
+    <metainfo>
+        <metd>20220422</metd>
+        <metc>
+            <cntinfo>
+                <cntorgp>
+                    <cntorg>ITD</cntorg>
+                    <cntper>Miami-Dade County</cntper>
+                </cntorgp>
+                <cntaddr>
+                    <addrtype>mailing</addrtype>
+                    <city>Miami</city>
+                    <state>FL</state>
+                    <postal>33173</postal>
+                    <country>US</country>
+                </cntaddr>
+                <cntvoice>305-275-7781</cntvoice>
+                <cntemail>GIS@miamidade.gov</cntemail>
+            </cntinfo>
+        </metc>
+        <metstdn>FGDC Content Standard for Digital Geospatial Metadata</metstdn>
+        <metstdv>FGDC-STD-001-1998</metstdv>
+        <mettc>local time</mettc>
+    </metainfo>
+</metadata>
