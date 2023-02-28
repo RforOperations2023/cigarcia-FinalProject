@@ -243,7 +243,7 @@ server <- function(input, output, session) {
   neigh.subset <- reactive({
     req(input$neighborhood)
     filter(neigh.load, LABEL %in% input$neighborhood)
-  })
+  }) 
   
   
   # Create Google Map with Legend ----------------------------------------------
@@ -252,7 +252,9 @@ server <- function(input, output, session) {
       addTiles(urlTemplate = "http://mt0.google.com/vt/lyrs=m&hl=en&x={x}&y={y}&z={z}&s=Ga", attribution = "Google", group = "Google") %>%
       addProviderTiles(provider = providers$Wikimedia, group = "Wiki") %>%
       setView(-80.191788, 25.761681, 12) %>%
-      addLayersControl(baseGroups = c("Google", "Wiki")) %>%
+      addLayersControl(baseGroups = c("Google", "Wiki"), 
+                       overlayGroups = c("Properties", "Neighborhoods"),
+                       options = layersControlOptions(collapsed = FALSE)) %>%
       addLegend("bottomright", 
                 title = "Property Price Range", 
                 #values = ~price.range,
