@@ -69,7 +69,7 @@ housing$index <- seq_along(housing$sale.prc)
 #IMPORTING SPATIAL DATA
 
 #Loading  Neighborhoods (Polygons)
-neigh.load <- st_read("./Miami_Neighborhoods_Shapefile.geojson")
+neigh.load <- st_read("https://services1.arcgis.com/CvuPhqcTQpZPT9qY/arcgis/rest/services/Miami_Neighborhoods_Shapefile/FeatureServer/0/query?outFields=*&where=1%3D1&f=geojson")
 
 
 #SPATIAL JOIN BETWEEN MUNICIPALITIES AND HOUSING 
