@@ -98,7 +98,7 @@ ui <- fluidPage(theme = shinythemes::shinytheme("simplex"),
                  titlePanel(
                    title = div(
                      img(height = 90, width = 130, src = "Miami_realty.png"), HTML("<span style='font-weight: bold;'> Housing Market in Miami (2016)</span>")),
-                     windowTitle = "Header"),
+                     windowTitle = "Miami Housing Market"),
                  
                  
                  # Sidebar layout with a input and output definitions --------------
@@ -133,9 +133,12 @@ ui <- fluidPage(theme = shinythemes::shinytheme("simplex"),
                      # Set neighborhood of the property -----------------------------
                      selectInput(inputId = "neighborhood",
                                  label = "Select one or more neighboorhods for all graphs, map and table:",
-                                 choices = unique(sort(neigh.load$LABEL)),
+                                 choices = unique(sort(joined_sf$LABEL)),
                                  selected = NA,
                                  multiple = TRUE),
+                     
+                     h6("Note: The list above pertains solely to Miami neighborhoods where properties were sold in 2016.", color = 'lightgray'),
+                     
                      
                      # Horizontal line for visual separation -----------------------
                      hr(),
